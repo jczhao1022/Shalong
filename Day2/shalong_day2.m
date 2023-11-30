@@ -16,20 +16,22 @@ imshow(X, [], 'InitialMagnification', 'fit')
 figure(2)
 imshow(b + e, [], 'InitialMagnification', 'fit')
 % 生成紧标架
-W = tightFrame2DCell(N); 
-Frame = [kron(W{1}', W{1}); % 低通
-         kron(W{1}', W{2}); % 高通
-         kron(W{1}', W{3}); % 高通
-         kron(W{2}', W{1}); % 高通
-         kron(W{2}', W{2}); % 高通
-         kron(W{2}', W{3}); % 高通
-         kron(W{3}', W{1}); % 高通
-         kron(W{3}', W{2}); % 高通
-         kron(W{3}', W{3}); % 高通 
+load W1.mat 
+load W2.mat
+load W3.mat
+Frame = [kron(W1', W1); % 低通
+         kron(W1', W2); % 高通
+         kron(W1', W3); % 高通
+         kron(W2', W1); % 高通
+         kron(W2', W2); % 高通
+         kron(W2', W3); % 高通
+         kron(W3', W1); % 高通
+         kron(W3', W2); % 高通
+         kron(W3', W3); % 高通 
 ];
-g = (kron(W{1}', W{1})) * x; % 低频
+g = (kron(W1', W1)) * x; % 低频
 figure(3)
 imshow(reshape(g, N, N), [], 'InitialMagnification', 'fit')
-g = (kron(W{2}', W{2})) * x; % 高频
+g = (kron(W2', W1)) * x; % 高频
 figure(4)
 imshow(reshape(g, N, N), [], 'InitialMagnification', 'fit')
